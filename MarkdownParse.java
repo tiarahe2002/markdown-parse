@@ -28,7 +28,10 @@ public class MarkdownParse {
             int openParen = markdown.indexOf("(", nextCloseBracket);
             int closeParen = markdown.indexOf(")", openParen);
             if(nextOpenBracket < openParen){
-                toReturn.add(markdown.substring(openParen + 1, closeParen));
+                if(markdown.substring(openParen + 1, closeParen).contains(".com") 
+                    || markdown.substring(openParen + 1, closeParen).contains(".html")){
+                    toReturn.add(markdown.substring(openParen + 1, closeParen));
+                }
             }
             currentIndex = closeParen + 1;
         }
