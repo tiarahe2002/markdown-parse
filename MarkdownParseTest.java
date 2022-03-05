@@ -2,7 +2,10 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.*;
@@ -33,4 +36,38 @@ public class MarkdownParseTest {
         String content = Files.readString(fileName);
         assertEquals(List.of("https://alink1.com"), MarkdownParse.getLinks(content));
     }
+
+    @Test
+    public void testSnip1() throws IOException, NoSuchFileException {
+
+        ArrayList<String> output = new ArrayList<>();
+        output.addAll(Arrays.asList("`google.com","google.com","ucsd.edu"));
+        Path fileName= Path.of("snip1.md");
+        String contents = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(contents);
+        assertEquals(output,links);
+    }
+
+    @Test
+    public void testSnip2() throws IOException, NoSuchFileException {
+
+        ArrayList<String> output = new ArrayList<>();
+        output.addAll(Arrays.asList("a.com(())","example.com"));
+        Path fileName= Path.of("snip2.md");
+        String contents = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(contents);
+        assertEquals(output,links);
+    }
+
+    @Test
+    public void testSnip3() throws IOException, NoSuchFileException {
+
+        ArrayList<String> output = new ArrayList<>();
+        output.addAll(Arrays.asList("https://ucsd-cse15l-w22.github.io/"));
+        Path fileName= Path.of("lab8-snip3.md");
+        String contents = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(contents);
+        assertEquals(output,links);
+    }
+
 }
