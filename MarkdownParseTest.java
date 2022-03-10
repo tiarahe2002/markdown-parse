@@ -1,14 +1,12 @@
 import static org.junit.Assert.*;
+import org.junit.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.junit.*;
+import java.util.*;
 
 public class MarkdownParseTest {
     @Test
@@ -52,7 +50,7 @@ public class MarkdownParseTest {
     public void testSnip2() throws IOException, NoSuchFileException {
 
         ArrayList<String> output = new ArrayList<>();
-        output.addAll(Arrays.asList("a.com(())","example.com"));
+        output.addAll(Arrays.asList("b.com","a.com(())","example.com"));
         Path fileName= Path.of("snip2.md");
         String contents = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(contents);
@@ -64,7 +62,7 @@ public class MarkdownParseTest {
 
         ArrayList<String> output = new ArrayList<>();
         output.addAll(Arrays.asList("https://ucsd-cse15l-w22.github.io/"));
-        Path fileName= Path.of("lab8-snip3.md");
+        Path fileName= Path.of("snip3.md");
         String contents = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(contents);
         assertEquals(output,links);
