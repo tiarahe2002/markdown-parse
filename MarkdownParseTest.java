@@ -50,7 +50,7 @@ public class MarkdownParseTest {
     public void testSnip2() throws IOException, NoSuchFileException {
 
         ArrayList<String> output = new ArrayList<>();
-        output.addAll(Arrays.asList("b.com","a.com(())","example.com"));
+        output.addAll(Arrays.asList("a.com","a.com(())","example.com"));
         Path fileName= Path.of("snip2.md");
         String contents = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(contents);
